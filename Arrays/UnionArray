@@ -1,0 +1,135 @@
+c++:
+
+#include <vector>
+using namespace std;
+
+vector<int> unionOptimal(vector<int>& a, vector<int>& b) {
+    vector<int> result;
+    int i = 0, j = 0;
+
+    while (i < a.size() && j < b.size()) {
+        if (!result.empty() && result.back() == a[i]) {
+            i++;
+            continue;
+        }
+        if (!result.empty() && result.back() == b[j]) {
+            j++;
+            continue;
+        }
+        if (a[i] < b[j]) {
+            result.push_back(a[i]);
+            i++;
+        } else if (b[j] < a[i]) {
+            result.push_back(b[j]);
+            j++;
+        } else {
+            result.push_back(a[i]);
+            i++;
+            j++;
+        }
+    }
+
+    while (i < a.size()) {
+        if (result.empty() || result.back() != a[i]) {
+            result.push_back(a[i]);
+        }
+        i++;
+    }
+
+    while (j < b.size()) {
+        if (result.empty() || result.back() != b[j]) {
+            result.push_back(b[j]);
+        }
+        j++;
+    }
+
+    return result;
+}
+
+
+java 
+
+import java.util.ArrayList;
+import java.util.List;
+
+public class UnionOptimal {
+    public static List<Integer> unionOptimal(List<Integer> a, List<Integer> b) {
+        List<Integer> result = new ArrayList<>();
+        int i = 0, j = 0;
+
+        while (i < a.size() && j < b.size()) {
+            if (!result.isEmpty() && result.get(result.size() - 1) == a.get(i)) {
+                i++;
+                continue;
+            }
+            if (!result.isEmpty() && result.get(result.size() - 1) == b.get(j)) {
+                j++;
+                continue;
+            }
+            if (a.get(i) < b.get(j)) {
+                result.add(a.get(i));
+                i++;
+            } else if (b.get(j) < a.get(i)) {
+                result.add(b.get(j));
+                j++;
+            } else {
+                result.add(a.get(i));
+                i++;
+                j++;
+            }
+        }
+
+        while (i < a.size()) {
+            if (result.isEmpty() || !result.get(result.size() - 1).equals(a.get(i))) {
+                result.add(a.get(i));
+            }
+            i++;
+        }
+
+        while (j < b.size()) {
+            if (result.isEmpty() || !result.get(result.size() - 1).equals(b.get(j))) {
+                result.add(b.get(j));
+            }
+            j++;
+        }
+
+        return result;
+    }
+}
+
+
+python:
+
+def union_optimal(a, b):
+    result = []
+    i, j = 0, 0
+
+    while i < len(a) and j < len(b):
+        if result and result[-1] == a[i]:
+            i += 1
+            continue
+        if result and result[-1] == b[j]:
+            j += 1
+            continue
+        if a[i] < b[j]:
+            result.append(a[i])
+            i += 1
+        elif b[j] < a[i]:
+            result.append(b[j])
+            j += 1
+        else:
+            result.append(a[i])
+            i += 1
+            j += 1
+
+    while i < len(a):
+        if not result or result[-1] != a[i]:
+            result.append(a[i])
+        i += 1
+
+    while j < len(b):
+        if not result or result[-1] != b[j]:
+            result.append(b[j])
+        j += 1
+
+    return result
