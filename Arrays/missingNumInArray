@@ -1,0 +1,17 @@
+c++:
+int missingNumber(vector<int>& nums) {
+    int n = nums.size(), total = n * (n + 1) / 2, sum = 0;
+    for (int num : nums) sum += num;
+    return total - sum;
+}
+java:
+ public static int missingNumber(int[] nums) {
+        int n = nums.length, total = n * (n + 1) / 2, sum = 0;
+        for (int num : nums) sum += num;
+        return total - sum;
+    }
+
+python:
+def missing_number(nums):
+    n = len(nums)
+    return n * (n + 1) // 2 - sum(nums)
