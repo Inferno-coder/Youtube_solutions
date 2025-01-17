@@ -1,0 +1,33 @@
+c++:
+void generateSubarrays(vector<int>& nums) {
+    int n = nums.size();
+    for (int i = 0; i < n; i++) {
+        vector<int> subarray;
+        for (int j = i; j < n; j++) {
+            subarray.push_back(nums[j]);
+            for (int num : subarray) {
+                cout << num << " ";
+            }
+            cout << endl;
+        }
+    }
+}
+java:
+public static void generateSubarrays(int[] nums) {
+        int n = nums.length;
+        for (int i = 0; i < n; i++) {
+            List<Integer> subarray = new ArrayList<>();
+            for (int j = i; j < n; j++) {
+                subarray.add(nums[j]);
+                System.out.println(subarray);
+            }
+        }
+    }
+python:
+def generate_subarrays(nums):
+    n = len(nums)
+    for i in range(n):
+        subarray = []
+        for j in range(i, n):
+            subarray.append(nums[j])
+            print(subarray)
