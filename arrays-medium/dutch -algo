@@ -1,0 +1,51 @@
+c++:
+#include <vector>
+using namespace std;
+
+void dutchFlag(vector<int>& arr) {
+    int low = 0, mid = 0, high = arr.size() - 1;
+    while (mid <= high) {
+        if (arr[mid] == 0)
+            swap(arr[low++], arr[mid++]);
+        else if (arr[mid] == 1)
+            mid++;
+        else
+            swap(arr[mid], arr[high--]);
+    }
+}
+
+
+java:
+class DutchFlag {
+    public static void dutchFlag(int[] arr) {
+        int low = 0, mid = 0, high = arr.length - 1;
+        while (mid <= high) {
+            if (arr[mid] == 0) {
+                int temp = arr[low];
+                arr[low++] = arr[mid];
+                arr[mid++] = temp;
+            } else if (arr[mid] == 1) {
+                mid++;
+            } else {
+                int temp = arr[mid];
+                arr[mid] = arr[high];
+                arr[high--] = temp;
+            }
+        }
+    }
+}
+
+python:
+def dutch_flag(arr):
+    low, mid, high = 0, 0, len(arr) - 1
+    while mid <= high:
+        if arr[mid] == 0:
+            arr[low], arr[mid] = arr[mid], arr[low]
+            low += 1
+            mid += 1
+        elif arr[mid] == 1:
+            mid += 1
+        else:
+            arr[mid], arr[high] = arr[high], arr[mid]
+            high -= 1
+    return arr
