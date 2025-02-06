@@ -1,0 +1,56 @@
+c++:
+ int maxi = INT_MIN, sum = 0;
+    int startInd = -1, endInd = -1, tempStart = -1;
+
+    for (int i = 0; i < n; i++) {
+        if (sum < 0) tempStart = i;
+        
+        sum += arr[i];
+
+        if (sum > maxi) {
+            maxi = sum;
+            startInd = tempStart;
+            endInd = i;
+        }
+
+        if (sum < 0) sum = 0;
+    }
+java:
+int maxi = Integer.MIN_VALUE, sum = 0;
+        int startInd = -1, endInd = -1, tempStart = -1;
+
+        for (int i = 0; i < n; i++) {
+            if (sum < 0) tempStart = i;
+            
+            sum += arr[i];
+
+            if (sum > maxi) {
+                maxi = sum;
+                startInd = tempStart;
+                endInd = i;
+            }
+
+            if (sum < 0) sum = 0;
+        }
+python:
+def max_subarray(arr):
+    n = len(arr)
+    maxi = float('-inf')
+    sum = 0
+    startInd = -1
+    endInd = -1
+    tempStart = -1
+
+    for i in range(n):
+        if sum < 0:
+            tempStart = i
+        
+        sum += arr[i]
+
+        if sum > maxi:
+            maxi = sum
+            startInd = tempStart
+            endInd = i
+
+        if sum < 0:
+            sum = 0
