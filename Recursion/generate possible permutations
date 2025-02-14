@@ -1,0 +1,78 @@
+c++:
+class Solution {
+public:
+    void generatePermutations(vector<int>& nums, int start, vector<vector<int>>& result) {
+        if (start == nums.size()) {
+            result.push_back(nums);
+            return;
+        }
+        for (int i = start; i < nums.size(); i++) {
+            swap(nums[start], nums[i]);
+            generatePermutations(nums, start + 1, result);
+            swap(nums[start], nums[i]);
+        }
+    }
+    
+    vector<vector<int>> permute(vector<int>& nums) {
+        vector<vector<int>> result;
+        generatePermutations(nums, 0, result);
+        return result;
+    }
+};
+
+java:
+import java.util.*;
+
+class Solution {
+    public void generatePermutations(List<Integer> nums, int start, List<List<Integer>> result) {
+        if (start == nums.size()) {
+            result.add(new ArrayList<>(nums));
+            return;
+        }
+        for (int i = start; i < nums.size(); i++) {
+            Collections.swap(nums, start, i);
+            generatePermutations(nums, start + 1, result);
+            Collections.swap(nums, start, i);
+        }
+    }
+
+    public List<List<Integer>> permute(int[] nums) {
+        List<List<Integer>> result = new ArrayList<>();
+        List<Integer> numList = new ArrayList<>();
+        for (int num : nums) numList.add(num);
+        generatePermutations(numList, 0, result);
+        return result;
+    }
+
+    public static void main(String[] args) {
+        Solution sol = new Solution();
+        int[] nums = {1, 2, 3};
+        List<List<Integer>> result = sol.permute(nums);
+        for (List<Integer> perm : result) {
+            System.out.println(perm);
+        }
+    }
+}
+
+python:
+class Solution:
+    def generatePermutations(self, nums, start, result):
+        if start == len(nums):
+            result.append(nums[:])
+            return
+        for i in range(start, len(nums)):
+            nums[start], nums[i] = nums[i], nums[start]
+            self.generatePermutations(nums, start + 1, result)
+            nums[start], nums[i] = nums[i], nums[start]
+
+    def permute(self, nums):
+        result = []
+        self.generatePermutations(nums, 0, result)
+        return result
+
+# Example usage
+sol = Solution()
+nums = [1, 2, 3]
+result = sol.permute(nums)
+for perm in result:
+    print(perm)
