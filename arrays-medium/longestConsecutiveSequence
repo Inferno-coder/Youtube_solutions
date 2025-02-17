@@ -1,0 +1,67 @@
+c++:
+class Solution {
+public:
+    int longestConsecutive(vector<int>& nums) {
+        unordered_set<int> st;
+        if (nums.size() == 0)
+            return 0;
+        for (auto it : nums)
+            st.insert(it);
+        int longest = 0;
+        for (int i = 0; i < nums.size(); i++) {
+            int count = 1;
+            int cur = nums[i];
+            if (st.count(cur - 1))
+                continue;
+            while (st.count(cur + 1)) {
+                cur++;
+                count++;
+                st.erase(cur);
+            }
+            longest = max(longest, count);
+        }
+        return longest;
+    }
+};
+java:
+import java.util.HashSet;
+
+class Solution {
+    public int longestConsecutive(int[] nums) {
+        HashSet<Integer> st = new HashSet<>();
+        if (nums.length == 0) return 0;
+        for (int num : nums) st.add(num);
+        int longest = 0;
+        for (int i = 0; i < nums.length; i++) {
+            int count = 1;
+            int cur = nums[i];
+            if (st.contains(cur - 1)) continue;
+            while (st.contains(cur + 1)) {
+                cur++;
+                count++;
+                st.remove(cur);
+            }
+            longest = Math.max(longest, count);
+        }
+        return longest;
+    }
+}
+
+python:
+class Solution:
+    def longestConsecutive(self, nums):
+        st = set(nums)
+        if not nums:
+            return 0
+        longest = 0
+        for num in nums:
+            if num - 1 in st:
+                continue
+            count = 1
+            cur = num
+            while cur + 1 in st:
+                cur += 1
+                count += 1
+                st.remove(cur)
+            longest = max(longest, count)
+        return longest
