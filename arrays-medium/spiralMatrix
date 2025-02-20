@@ -1,0 +1,111 @@
+c++:
+class Solution {
+public:
+    vector<int> spiralOrder(vector<vector<int>>& mat) {
+        int n=mat.size();
+        int m=mat[0].size();
+        int tot=n*m,count=0;
+        int startingRow=0,endingRow=n-1,startingCol=0,endingCol=m-1;
+        vector<int>res;
+        while(count<tot){
+            for(int i=startingCol;i<=endingCol && count<tot;i++){
+                res.push_back(mat[startingRow][i]);
+                count++;
+            }
+            startingRow++;
+            for(int i=startingRow;i<=endingRow && count<tot;i++){
+                res.push_back(mat[i][endingCol]);
+                count++;
+            }
+            endingCol--;
+            for(int i=endingCol;i>=startingCol && count<tot;i--){
+                res.push_back(mat[endingRow][i]);
+                count++;
+            }
+            endingRow--;
+            for(int i=endingRow;i>=startingRow && count<tot;i--){
+                res.push_back(mat[i][startingCol]);
+                count++;
+            }
+            startingCol++;
+        }
+        return res;
+    }
+};
+java:
+import java.util.*;
+
+class Solution {
+    public List<Integer> spiralOrder(int[][] mat) {
+        int n = mat.length;
+        int m = mat[0].length;
+        int tot = n * m, count = 0;
+        int startingRow = 0, endingRow = n - 1, startingCol = 0, endingCol = m - 1;
+        List<Integer> res = new ArrayList<>();
+
+        while (count < tot) {
+            for (int i = startingCol; i <= endingCol && count < tot; i++) {
+                res.add(mat[startingRow][i]);
+                count++;
+            }
+            startingRow++;
+
+            for (int i = startingRow; i <= endingRow && count < tot; i++) {
+                res.add(mat[i][endingCol]);
+                count++;
+            }
+            endingCol--;
+
+            for (int i = endingCol; i >= startingCol && count < tot; i--) {
+                res.add(mat[endingRow][i]);
+                count++;
+            }
+            endingRow--;
+
+            for (int i = endingRow; i >= startingRow && count < tot; i--) {
+                res.add(mat[i][startingCol]);
+                count++;
+            }
+            startingCol++;
+        }
+        return res;
+    }
+}
+
+python:
+from typing import List
+
+class Solution:
+    def spiralOrder(self, mat: List[List[int]]) -> List[int]:
+        n, m = len(mat), len(mat[0])
+        tot, count = n * m, 0
+        startingRow, endingRow = 0, n - 1
+        startingCol, endingCol = 0, m - 1
+        res = []
+
+        while count < tot:
+            for i in range(startingCol, endingCol + 1):
+                if count < tot:
+                    res.append(mat[startingRow][i])
+                    count += 1
+            startingRow += 1
+
+            for i in range(startingRow, endingRow + 1):
+                if count < tot:
+                    res.append(mat[i][endingCol])
+                    count += 1
+            endingCol -= 1
+
+            for i in range(endingCol, startingCol - 1, -1):
+                if count < tot:
+                    res.append(mat[endingRow][i])
+                    count += 1
+            endingRow -= 1
+
+            for i in range(endingRow, startingRow - 1, -1):
+                if count < tot:
+                    res.append(mat[i][startingCol])
+                    count += 1
+            startingCol += 1
+
+        return res
