@@ -1,0 +1,61 @@
+c++:
+class Solution {
+public:
+    bool isIsomorphic(string s, string t) {
+        vector<int>hashS(128,-1);
+        vector<int>hashT(128,-1);
+        int n=s.length(),m=t.length();
+        if(n!=m)return false;
+        for(int i=0;i<n;i++){
+            if(hashS[s[i]]==-1 && hashT[t[i]]==-1){
+                hashS[s[i]]=t[i];
+                hashT[t[i]]=s[i];
+            }
+            else if(hashS[s[i]]!=t[i] || hashT[t[i]]!= s[i])return false;
+        }
+        return true;
+    }
+};
+java:
+class Solution {
+    public boolean isIsomorphic(String s, String t) {
+        int[] hashS = new int[128];
+        int[] hashT = new int[128];
+        Arrays.fill(hashS, -1);
+        Arrays.fill(hashT, -1);
+        
+        int n = s.length(), m = t.length();
+        if (n != m) return false;
+        
+        for (int i = 0; i < n; i++) {
+            char sc = s.charAt(i);
+            char tc = t.charAt(i);
+            
+            if (hashS[sc] == -1 && hashT[tc] == -1) {
+                hashS[sc] = tc;
+                hashT[tc] = sc;
+            } else if (hashS[sc] != tc || hashT[tc] != sc) {
+                return false;
+            }
+        }
+        return true;
+    }
+}
+
+python:
+class Solution:
+    def isIsomorphic(self, s: str, t: str) -> bool:
+        hashS = [-1] * 128
+        hashT = [-1] * 128
+        
+        if len(s) != len(t):
+            return False
+        
+        for sc, tc in zip(s, t):
+            if hashS[ord(sc)] == -1 and hashT[ord(tc)] == -1:
+                hashS[ord(sc)] = ord(tc)
+                hashT[ord(tc)] = ord(sc)
+            elif hashS[ord(sc)] != ord(tc) or hashT[ord(tc)] != ord(sc):
+                return False
+        
+        return True
