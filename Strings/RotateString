@@ -1,0 +1,46 @@
+cpp:
+class Solution {
+public:
+    bool isMatch(string doubled,int idx,string goal){
+        string str1=doubled.substr(idx,goal.length());
+        return str1==goal;
+    }
+    bool rotateString(string s, string goal) {
+        if(s.length()!=goal.length())return false;
+        string doubled=s+s;
+        for(int i=0;i<doubled.length();i++){
+            if(isMatch(doubled,i,goal))return true;
+        }
+        return false;
+    }
+};
+java:
+class Solution {
+    public boolean isMatch(String doubled, int idx, String goal) {
+        String str1 = doubled.substring(idx, idx + goal.length());
+        return str1.equals(goal);
+    }
+
+    public boolean rotateString(String s, String goal) {
+        if (s.length() != goal.length()) return false;
+        String doubled = s + s;
+        for (int i = 0; i < doubled.length() - goal.length() + 1; i++) {
+            if (isMatch(doubled, i, goal)) return true;
+        }
+        return false;
+    }
+}
+
+python:
+class Solution:
+    def isMatch(self, doubled: str, idx: int, goal: str) -> bool:
+        return doubled[idx:idx + len(goal)] == goal
+
+    def rotateString(self, s: str, goal: str) -> bool:
+        if len(s) != len(goal):
+            return False
+        doubled = s + s
+        for i in range(len(doubled) - len(goal) + 1):
+            if self.isMatch(doubled, i, goal):
+                return True
+        return False
