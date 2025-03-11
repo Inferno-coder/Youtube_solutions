@@ -1,0 +1,52 @@
+c++:
+class Solution {
+public:
+    string largestOddNumber(string num) {
+        int n=num.length(),i=n-1;
+        while(i>=0 && (num[i]-'0')%2==0){
+            i--;
+        }
+        return num.substr(0,i+1);
+    }
+};
+
+java:
+class Solution {
+    public String largestOddNumber(String num) {
+        int i = num.length() - 1;
+        
+        // Iterate from the last character and find the rightmost odd digit
+        while (i >= 0 && (num.charAt(i) - '0') % 2 == 0) {
+            i--;
+        }
+        
+        // Return substring from start to i (inclusive)
+        return num.substring(0, i + 1);
+    }
+
+    public static void main(String[] args) {
+        Solution sol = new Solution();
+        System.out.println(sol.largestOddNumber("52"));      // Output: "5"
+        System.out.println(sol.largestOddNumber("4206"));    // Output: ""
+        System.out.println(sol.largestOddNumber("35427"));   // Output: "35427"
+    }
+}
+
+
+python:
+class Solution:
+    def largestOddNumber(self, num: str) -> str:
+        i = len(num) - 1
+
+        # Iterate from the last character and find the rightmost odd digit
+        while i >= 0 and (int(num[i]) % 2 == 0):
+            i -= 1
+
+        # Return substring from start to i (inclusive)
+        return num[:i+1]
+
+# Example usage
+sol = Solution()
+print(sol.largestOddNumber("52"))      # Output: "5"
+print(sol.largestOddNumber("4206"))    # Output: ""
+print(sol.largestOddNumber("35427"))   # Output: "35427"
