@@ -1,0 +1,86 @@
+c++:
+class Solution {
+public:
+    string frequencySort(string s) {
+      unordered_map<char,int>mp;
+      vector<char>order;
+      for(auto it:s){
+        if(mp[it]==0){
+            order.push_back(it);
+        }
+        mp[it]++;
+      }      
+      vector<string>bucket(s.length()+1);
+      for(auto c:order){
+        bucket[mp[c]]+=string(mp[c],c);
+      }
+      string res="";
+      for(int i=s.length();i>0;i--){
+        if(bucket[i]!="")res+=bucket[i];
+      } 
+      return res;
+    }
+};
+
+java:
+import java.util.*;
+
+class Solution {
+    public String frequencySort(String s) {
+        Map<Character, Integer> freq = new HashMap<>();
+        List<Character> order = new ArrayList<>();
+
+        for (char c : s.toCharArray()) {
+            if (!freq.containsKey(c)) {
+                order.add(c);
+            }
+            freq.put(c, freq.getOrDefault(c, 0) + 1);
+        }
+
+        List<String> bucket = new ArrayList<>(Collections.nCopies(s.length() + 1, ""));
+        for (char c : order) {
+            bucket.set(freq.get(c), bucket.get(freq.get(c)) + String.valueOf(c).repeat(freq.get(c)));
+        }
+
+        StringBuilder res = new StringBuilder();
+        for (int i = s.length(); i > 0; i--) {
+            if (!bucket.get(i).isEmpty()) {
+                res.append(bucket.get(i));
+            }
+        }
+
+        return res.toString();
+    }
+
+    public static void main(String[] args) {
+        Solution sol = new Solution();
+        System.out.println(sol.frequencySort("tree")); // Example output: "eert"
+    }
+}
+
+
+python:
+class Solution:
+    def frequencySort(self, s: str) -> str:
+        freq = {}
+        order = []
+
+        for c in s:
+            if c not in freq:
+                order.append(c)
+            freq[c] = freq.get(c, 0) + 1
+
+        bucket = [""] * (len(s) + 1)
+        for c in order:
+            bucket[freq[c]] += c * freq[c]
+
+        res = ""
+        for i in range(len(s), 0, -1):
+            if bucket[i]:
+                res += bucket[i]
+
+        return res
+
+# Example usage
+sol = Solution()
+print(sol.frequencySort("tree"))  # Example output: "eert"
