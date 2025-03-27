@@ -1,0 +1,58 @@
+c++:
+class Solution {
+public:
+    int maxDepth(string s) {
+       int n=s.length();
+       int count=0,maxi=0;
+       for(int i=0;i<n;i++){
+        if(s[i]=='(')count++;
+        if(s[i]==')')count--;
+        maxi=max(count,maxi);
+       }
+       return maxi;
+    }
+};
+python:
+class Solution:
+    def maxDepth(self, s: str) -> int:
+        count = 0
+        maxi = 0
+        for char in s:
+            if char == '(':
+                count += 1
+                maxi = max(maxi, count)
+            elif char == ')':
+                count -= 1
+        return maxi
+
+# Example usage
+sol = Solution()
+s = input("Enter a valid parentheses string: ")
+print("Maximum Nesting Depth:", sol.maxDepth(s))
+
+java:
+class Solution {
+    public int maxDepth(String s) {
+        int count = 0, maxi = 0;
+        
+        for (char ch : s.toCharArray()) {
+            if (ch == '(') {
+                count++;
+                maxi = Math.max(maxi, count);
+            } else if (ch == ')') {
+                count--;
+            }
+        }
+        
+        return maxi;
+    }
+
+    public static void main(String[] args) {
+        Solution sol = new Solution();
+        java.util.Scanner sc = new java.util.Scanner(System.in);
+        System.out.print("Enter a valid parentheses string: ");
+        String s = sc.next();
+        System.out.println("Maximum Nesting Depth: " + sol.maxDepth(s));
+        sc.close();
+    }
+}
