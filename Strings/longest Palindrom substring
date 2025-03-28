@@ -1,0 +1,66 @@
+c++:
+class Solution {
+public:
+    string expandAroundCenter(string s, int left, int right) {
+        while (left >= 0 && right < s.length() && s[left] == s[right]) {
+            left--;
+            right++;
+        }
+        return s.substr(left + 1, right - left - 1);
+    }
+
+    string longestPalindrome(string s) {
+        string longest = "";
+        for (int i = 0; i < s.length(); i++) {
+            string odd = expandAroundCenter(s, i, i);   // Odd-length palindrome
+            if (odd.length() > longest.length()) longest = odd;
+
+            string even = expandAroundCenter(s, i, i + 1); // Even-length palindrome
+            if (even.length() > longest.length()) longest = even;
+        }
+        return longest;
+    }
+};
+java:
+class Solution {
+    public String expandAroundCenter(String s, int left, int right) {
+        while (left >= 0 && right < s.length() && s.charAt(left) == s.charAt(right)) {
+            left--;
+            right++;
+        }
+        return s.substring(left + 1, right);
+    }
+
+    public String longestPalindrome(String s) {
+        String longest = "";
+        for (int i = 0; i < s.length(); i++) {
+            String odd = expandAroundCenter(s, i, i);   // Odd-length palindrome
+            if (odd.length() > longest.length()) longest = odd;
+
+            String even = expandAroundCenter(s, i, i + 1); // Even-length palindrome
+            if (even.length() > longest.length()) longest = even;
+        }
+        return longest;
+    }
+}
+
+python:
+class Solution:
+    def expandAroundCenter(self, s: str, left: int, right: int) -> str:
+        while left >= 0 and right < len(s) and s[left] == s[right]:
+            left -= 1
+            right += 1
+        return s[left + 1:right]
+
+    def longestPalindrome(self, s: str) -> str:
+        longest = ""
+        for i in range(len(s)):
+            odd = self.expandAroundCenter(s, i, i)  # Odd-length palindrome
+            if len(odd) > len(longest):
+                longest = odd
+
+            even = self.expandAroundCenter(s, i, i + 1)  # Even-length palindrome
+            if len(even) > len(longest):
+                longest = even
+
+        return longest
