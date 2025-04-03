@@ -1,0 +1,79 @@
+c++:
+class Solution {
+public:
+    int computeBeauty(vector<int>& freq) {
+        int mini = INT_MAX, maxi = INT_MIN;
+        for (int k = 0; k < 26; k++) {
+            if (freq[k] > 0) {
+                mini = min(mini, freq[k]);
+                maxi = max(maxi, freq[k]);
+            }
+        }
+        return maxi - mini;
+    }
+
+    int beautySum(string s) {
+        int n = s.length();
+        int res = 0;
+
+        for (int i = 0; i < n; i++) {
+            vector<int> freq(26, 0);
+            for (int j = i; j < n; j++) {
+                freq[s[j] - 'a']++;
+                res += computeBeauty(freq);
+            }
+        }
+        return res;
+    }
+};
+
+java:
+class Solution {
+    public int computeBeauty(int[] freq) {
+        int mini = Integer.MAX_VALUE, maxi = Integer.MIN_VALUE;
+        for (int k = 0; k < 26; k++) {
+            if (freq[k] > 0) {
+                mini = Math.min(mini, freq[k]);
+                maxi = Math.max(maxi, freq[k]);
+            }
+        }
+        return maxi - mini;
+    }
+
+    public int beautySum(String s) {
+        int n = s.length();
+        int res = 0;
+
+        for (int i = 0; i < n; i++) {
+            int[] freq = new int[26];
+            for (int j = i; j < n; j++) {
+                freq[s.charAt(j) - 'a']++;
+                res += computeBeauty(freq);
+            }
+        }
+        return res;
+    }
+}
+
+python:
+class Solution:
+    def computeBeauty(self, freq):
+        mini = float('inf')
+        maxi = float('-inf')
+        for count in freq:
+            if count > 0:
+                mini = min(mini, count)
+                maxi = max(maxi, count)
+        return maxi - mini
+
+    def beautySum(self, s: str) -> int:
+        n = len(s)
+        res = 0
+
+        for i in range(n):
+            freq = [0] * 26
+            for j in range(i, n):
+                freq[ord(s[j]) - ord('a')] += 1
+                res += self.computeBeauty(freq)
+
+        return res
