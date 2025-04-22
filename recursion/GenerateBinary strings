@@ -1,0 +1,56 @@
+c++:
+class Solution {
+public:
+    void solve(vector<string>& res, int n, string temp) {
+        if (temp.length() == n) {
+            res.push_back(temp);
+            return;
+        }
+        if (temp.empty() ||  temp[temp.length() - 1] != '0'){
+        solve(res, n, temp + '0');
+        }
+        solve(res, n, temp + '1');
+    }
+    vector<string> validStrings(int n) {
+        vector<string> res;
+        solve(res, n, "");
+        return res;
+    }
+};
+
+java:
+import java.util.*;
+
+public class Solution {
+    public void solve(List<String> res, int n, String temp) {
+        if (temp.length() == n) {
+            res.add(temp);
+            return;
+        }
+        if (temp.isEmpty() || temp.charAt(temp.length() - 1) != '0') {
+            solve(res, n, temp + "0");
+        }
+        solve(res, n, temp + "1");
+    }
+
+    public List<String> validStrings(int n) {
+        List<String> res = new ArrayList<>();
+        solve(res, n, "");
+        return res;
+    }
+}
+
+python:
+class Solution:
+    def solve(self, res, n, temp):
+        if len(temp) == n:
+            res.append(temp)
+            return
+        if not temp or temp[-1] != '0':
+            self.solve(res, n, temp + '0')
+        self.solve(res, n, temp + '1')
+
+    def validStrings(self, n):
+        res = []
+        self.solve(res, n, "")
+        return res
