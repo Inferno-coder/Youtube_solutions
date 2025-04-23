@@ -1,0 +1,58 @@
+c++:
+class Solution {
+public:
+    void solve(vector<string>&res,int open,int close,int n,string temp){
+        if(temp.length() == n*2){
+            res.push_back(temp);
+            return;
+        }
+        if(open<n)solve(res,open+1,close,n,temp+'(');
+        if(open>close && close<n)solve(res,open,close+1,n,temp+')');
+    }
+    vector<string> generateParenthesis(int n) {
+        vector<string>res;
+        solve(res,0,0,n,"");
+        return res;
+    }
+};
+python:
+class Solution:
+    def solve(self, res, open, close, n, temp):
+        if len(temp) == n * 2:
+            res.append(temp)
+            return
+        
+        if open < n:
+            self.solve(res, open + 1, close, n, temp + '(')
+        
+        if open > close and close < n:
+            self.solve(res, open, close + 1, n, temp + ')')
+
+    def generateParenthesis(self, n: int):
+        res = []
+        self.solve(res, 0, 0, n, "")
+        return res
+
+java:
+import java.util.*;
+
+class Solution {
+    public void solve(List<String> res, int open, int close, int n, String temp) {
+        if (temp.length() == n * 2) {
+            res.add(temp);
+            return;
+        }
+
+        if (open < n)
+            solve(res, open + 1, close, n, temp + "(");
+        
+        if (open > close && close < n)
+            solve(res, open, close + 1, n, temp + ")");
+    }
+
+    public List<String> generateParenthesis(int n) {
+        List<String> res = new ArrayList<>();
+        solve(res, 0, 0, n, "");
+        return res;
+    }
+}
