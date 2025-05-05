@@ -1,0 +1,76 @@
+c++:
+class Solution {
+public:
+    void solve(int ind,int n,vector<int>& nums,vector<vector<int>>&res,vector<int>&temp){
+        if(ind==n){
+            res.push_back(temp);
+            return;
+        }
+        solve(ind+1,n,nums,res,temp);
+        temp.push_back(nums[ind]);
+        solve(ind+1,n,nums,res,temp);
+        temp.pop_back();
+    } 
+    vector<vector<int>> subsets(vector<int>& nums) {
+        int n=nums.size();
+        vector<vector<int>>res;
+        vector<int>temp;
+        solve(0,n,nums,res,temp);
+        return res;
+    }
+};
+
+java:
+import java.util.*;
+
+class Solution {
+    public void solve(int ind, int n, List<Integer> nums, List<List<Integer>> res, List<Integer> temp) {
+        if (ind == n) {
+            res.add(new ArrayList<>(temp));
+            return;
+        }
+
+        // Exclude nums[ind]
+        solve(ind + 1, n, nums, res, temp);
+
+        // Include nums[ind]
+        temp.add(nums.get(ind));
+        solve(ind + 1, n, nums, res, temp);
+        temp.remove(temp.size() - 1);
+    }
+
+    public List<List<Integer>> subsets(int[] nums) {
+        int n = nums.length;
+        List<List<Integer>> res = new ArrayList<>();
+        List<Integer> temp = new ArrayList<>();
+        List<Integer> numsList = new ArrayList<>();
+        for (int num : nums) {
+            numsList.add(num);
+        }
+        solve(0, n, numsList, res, temp);
+        return res;
+    }
+}
+
+
+python:
+from typing import List
+
+class Solution:
+    def solve(self, ind: int, n: int, nums: List[int], res: List[List[int]], temp: List[int]):
+        if ind == n:
+            res.append(temp[:])  # Make a copy
+            return
+
+        # Exclude nums[ind]
+        self.solve(ind + 1, n, nums, res, temp)
+
+        # Include nums[ind]
+        temp.append(nums[ind])
+        self.solve(ind + 1, n, nums, res, temp)
+        temp.pop()
+
+    def subsets(self, nums: List[int]) -> List[List[int]]:
+        res = []
+        self.solve(0, len(nums), nums, res, [])
+        return res
