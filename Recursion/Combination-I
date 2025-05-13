@@ -1,0 +1,72 @@
+c++:
+class Solution {
+public:
+    void solve(int ind,vector<int>&c,int target,vector<int>&ds,vector<vector<int>>&res){
+    if(target==0){
+        res.push_back(ds);
+        return;
+    }
+    if(ind==c.size())return;
+    if(target>=c[ind]){
+        ds.push_back(c[ind]);
+        solve(ind,c,target-c[ind],ds,res);
+        ds.pop_back();
+        }
+    solve(ind+1,c,target,ds,res);
+    }
+    vector<vector<int>> combinationSum(vector<int>& c, int target) {
+        vector<vector<int>>res;
+        vector<int>temp;
+        solve(0,c,target,temp,res);
+        return res;
+    }
+};
+
+java:
+import java.util.*;
+
+class Solution {
+    public void solve(int ind, int[] c, int target, List<Integer> ds, List<List<Integer>> res) {
+        if (target == 0) {
+            res.add(new ArrayList<>(ds));
+            return;
+        }
+        if (ind == c.length) return;
+
+        if (target >= c[ind]) {
+            ds.add(c[ind]);
+            solve(ind, c, target - c[ind], ds, res);
+            ds.remove(ds.size() - 1);
+        }
+
+        solve(ind + 1, c, target, ds, res);
+    }
+
+    public List<List<Integer>> combinationSum(int[] c, int target) {
+        List<List<Integer>> res = new ArrayList<>();
+        solve(0, c, target, new ArrayList<>(), res);
+        return res;
+    }
+}
+
+
+python:
+class Solution:
+    def solve(self, ind, c, target, ds, res):
+        if target == 0:
+            res.append(list(ds))
+            return
+        if ind == len(c):
+            return
+
+        if target >= c[ind]:
+            ds.append(c[ind])
+            self.solve(ind, c, target - c[ind], ds, res)
+            ds.pop()
+
+        self.solve(ind + 1, c, target, ds, res)
+
+    def combinationSum(self, c, target):
+        res = []
+        self.solve(0, c, target, [], res)
+        return res
