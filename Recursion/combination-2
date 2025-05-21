@@ -1,0 +1,77 @@
+c++:
+class Solution {
+public:
+    void solve(int ind,vector<int>&c,int target,vector<int>&ds,vector<vector<int>>&res){
+    if(target==0){
+        res.push_back(ds);
+        return;
+    }
+    if(ind==c.size())return;
+    for(int i=ind;i<c.size();i++){
+        if(i> ind && c[i]==c[i-1])continue;
+        if(target>=c[i]){
+            ds.push_back(c[i]);
+            solve(i+1,c,target-c[i],ds,res);
+            ds.pop_back();
+            }
+     }
+    }
+    vector<vector<int>> combinationSum2(vector<int>& c, int target) {
+        sort(c.begin(), c.end());
+        vector<vector<int>> res;
+        vector<int> temp;
+        solve(0, c, target, temp, res);
+        return res;
+    }
+};
+java:
+import java.util.*;
+
+class Solution {
+    public void solve(int ind, int[] c, int target, List<Integer> ds, List<List<Integer>> res) {
+        if (target == 0) {
+            res.add(new ArrayList<>(ds));
+            return;
+        }
+
+        for (int i = ind; i < c.length; i++) {
+            if (i > ind && c[i] == c[i - 1]) continue; // Skip duplicates
+            if (c[i] > target) break;
+
+            ds.add(c[i]);
+            solve(i + 1, c, target - c[i], ds, res);
+            ds.remove(ds.size() - 1);
+        }
+    }
+
+    public List<List<Integer>> combinationSum2(int[] c, int target) {
+        Arrays.sort(c);
+        List<List<Integer>> res = new ArrayList<>();
+        solve(0, c, target, new ArrayList<>(), res);
+        return res;
+    }
+}
+
+python:
+class Solution:
+    def combinationSum2(self, candidates, target):
+        res = []
+        candidates.sort()
+
+        def solve(ind, target, ds):
+            if target == 0:
+                res.append(ds[:])
+                return
+
+            for i in range(ind, len(candidates)):
+                if i > ind and candidates[i] == candidates[i - 1]:
+                    continue
+                if candidates[i] > target:
+                    break
+
+                ds.append(candidates[i])
+                solve(i + 1, target - candidates[i], ds)
+                ds.pop()
+
+        solve(0, target, [])
+        return res
