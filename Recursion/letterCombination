@@ -1,0 +1,66 @@
+c++:
+class Solution {
+public:
+    void solve(int ind,string digits,vector<string>&res,string temp,string arr[]){
+        if(temp.length() == digits.length()){
+            res.push_back(temp);
+            return;
+        }
+            int dig=digits[ind]-'0';
+            for(int i=0;i<arr[dig].length();i++){
+                solve(ind+1,digits,res,temp+arr[dig][i],arr);
+            }
+    }
+    vector<string> letterCombinations(string digits) {
+        if (digits.empty()) return {}; 
+        string arr[10] = {"", "", "abc", "def", "ghi", "jkl", "mno", "pqrs", "tuv", "wxyz"};
+        vector<string>res;
+        solve(0,digits,res,"",arr);
+        return res;
+    }
+};
+java:
+import java.util.*;
+
+class Solution {
+    public void solve(int ind, String digits, List<String> res, String temp, String[] arr) {
+        if (temp.length() == digits.length()) {
+            res.add(temp);
+            return;
+        }
+
+        int dig = digits.charAt(ind) - '0';
+        for (int i = 0; i < arr[dig].length(); i++) {
+            solve(ind + 1, digits, res, temp + arr[dig].charAt(i), arr);
+        }
+    }
+
+    public List<String> letterCombinations(String digits) {
+        if (digits.isEmpty()) return new ArrayList<>();
+
+        String[] arr = {"", "", "abc", "def", "ghi", "jkl", "mno", "pqrs", "tuv", "wxyz"};
+        List<String> res = new ArrayList<>();
+        solve(0, digits, res, "", arr);
+        return res;
+    }
+}
+
+python:
+class Solution:
+    def solve(self, ind, digits, res, temp, arr):
+        if len(temp) == len(digits):
+            res.append(temp)
+            return
+        
+        dig = int(digits[ind])
+        for ch in arr[dig]:
+            self.solve(ind + 1, digits, res, temp + ch, arr)
+
+    def letterCombinations(self, digits: str) -> list[str]:
+        if not digits:
+            return []
+
+        arr = ["", "", "abc", "def", "ghi", "jkl", "mno", "pqrs", "tuv", "wxyz"]
+        res = []
+        self.solve(0, digits, res, "", arr)
+        return res
