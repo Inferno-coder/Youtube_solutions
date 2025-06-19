@@ -1,0 +1,217 @@
+c++:
+#include <iostream>
+using namespace std;
+
+// Node structure
+struct Node {
+    int data;
+    Node* next;
+    
+    Node(int val) {
+        data = val;
+        next = nullptr;
+    }
+};
+
+// Insert at the beginning
+void insertAtBeginning(Node*& head, int val) {
+    Node* n=new Node(val);
+    n->next=head;
+    head=n;
+}
+
+// Insert at the end
+void insertAtEnd(Node*& head, int val) {
+  Node* tail=head;
+  while(tail->next != NULL){
+      tail=tail->next;
+  }
+  Node* n=new Node(val);
+  tail->next=n;
+  n->next=NULL;
+}
+
+// Insert at a specific position (0-based index)
+void insertAtPosition(Node*& head, int val, int pos) {
+  Node* temp=head;
+  for(int i=0;i<pos-1;i++){
+      temp=temp->next;
+  }
+  Node* n=new Node(val);
+  n->next=temp->next;
+  temp->next=n;
+}
+
+// Print the linked list
+void printList(Node* head) {
+    while (head) {
+        cout << head->data << " -> ";
+        head = head->next;
+    }
+    cout << "NULL" << endl;
+}
+
+// Main function to demonstrate usage
+int main() {
+    Node* head = nullptr;
+
+     insertAtBeginning(head, 10);          
+     insertAtBeginning(head, 100);          
+    insertAtEnd(head, 20);          
+    insertAtEnd(head, 30);          
+    insertAtPosition(head, 200, 2);   
+
+    printList(head);                 
+
+    return 0;
+}
+
+
+
+java:
+class Node {
+    int data;
+    Node next;
+
+    Node(int val) {
+        data = val;
+        next = null;
+    }
+}
+
+public class LinkedList {
+    static Node head = null;
+
+    // Insert at the beginning
+    static void insertAtBeginning(int val) {
+        Node newNode = new Node(val);
+        newNode.next = head;
+        head = newNode;
+    }
+
+    // Insert at the end
+    static void insertAtEnd(int val) {
+        Node newNode = new Node(val);
+        if (head == null) {
+            head = newNode;
+            return;
+        }
+        Node tail = head;
+        while (tail.next != null) {
+            tail = tail.next;
+        }
+        tail.next = newNode;
+    }
+
+    // Insert at a specific position
+    static void insertAtPosition(int val, int pos) {
+        if (pos == 0) {
+            insertAtBeginning(val);
+            return;
+        }
+
+        Node temp = head;
+        for (int i = 0; i < pos - 1 && temp != null; i++) {
+            temp = temp.next;
+        }
+
+        if (temp == null) {
+            System.out.println("Position out of bounds");
+            return;
+        }
+
+        Node newNode = new Node(val);
+        newNode.next = temp.next;
+        temp.next = newNode;
+    }
+
+    // Print the linked list
+    static void printList() {
+        Node temp = head;
+        while (temp != null) {
+            System.out.print(temp.data + " -> ");
+            temp = temp.next;
+        }
+        System.out.println("NULL");
+    }
+
+    // Main method
+    public static void main(String[] args) {
+        insertAtBeginning(10);
+        insertAtBeginning(100);
+        insertAtEnd(20);
+        insertAtEnd(30);
+        insertAtPosition(200, 2);
+
+        printList(); // Output: 100 -> 10 -> 200 -> 20 -> 30 -> NULL
+    }
+}
+
+
+
+python:
+
+class Node:
+    def __init__(self, val):
+        self.data = val
+        self.next = None
+
+class LinkedList:
+    def __init__(self):
+        self.head = None
+
+    # Insert at the beginning
+    def insert_at_beginning(self, val):
+        new_node = Node(val)
+        new_node.next = self.head
+        self.head = new_node
+
+    # Insert at the end
+    def insert_at_end(self, val):
+        new_node = Node(val)
+        if not self.head:
+            self.head = new_node
+            return
+        tail = self.head
+        while tail.next:
+            tail = tail.next
+        tail.next = new_node
+
+    # Insert at specific position
+    def insert_at_position(self, val, pos):
+        if pos == 0:
+            self.insert_at_beginning(val)
+            return
+
+        temp = self.head
+        for _ in range(pos - 1):
+            if not temp:
+                print("Position out of bounds")
+                return
+            temp = temp.next
+
+        if not temp:
+            print("Position out of bounds")
+            return
+
+        new_node = Node(val)
+        new_node.next = temp.next
+        temp.next = new_node
+
+    # Print the list
+    def print_list(self):
+        temp = self.head
+        while temp:
+            print(temp.data, end=" -> ")
+            temp = temp.next
+        print("NULL")
+
+# Driver code
+ll = LinkedList()
+ll.insert_at_beginning(10)
+ll.insert_at_beginning(100)
+ll.insert_at_end(20)
+ll.insert_at_end(30)
+ll.insert_at_position(200, 2)
+
+ll.print_list()  # Output: 100 -> 10 -> 200 -> 20 -> 30 -> NULL
