@@ -1,0 +1,48 @@
+Cpp+:
+bool searchKey(int n, Node* head, int key) {
+        // Code here
+        Node* temp=head;
+        while(temp!=NULL){
+            if(temp->data == key)return true;
+            temp=temp->next;
+        }
+        return false;
+    }
+  java:
+  class Node {
+    int data;
+    Node next;
+
+    Node(int data) {
+        this.data = data;
+        this.next = null;
+    }
+}
+
+public class Solution {
+    public static boolean searchKey(int n, Node head, int key) {
+        Node temp = head;
+        while (temp != null) {
+            if (temp.data == key) {
+                return true;
+            }
+            temp = temp.next;
+        }
+        return false;
+    }
+}
+
+
+python:
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.next = None
+
+def searchKey(n, head, key):
+    temp = head
+    while temp is not None:
+        if temp.data == key:
+            return True
+        temp = temp.next
+    return False
