@@ -1,0 +1,47 @@
+c++:
+class Solution {
+public:
+    ListNode* reverseList(ListNode* head) {
+        ListNode *cur=head, *prev=NULL,*Nxt=NULL;
+        while(cur){
+            Nxt=cur->next;
+            cur->next=prev;
+            prev=cur;
+            cur=Nxt;
+        }
+        return prev;
+    }
+};
+
+java:
+class Solution {
+    public ListNode reverseList(ListNode head) {
+        ListNode cur = head;
+        ListNode prev = null;
+        ListNode nxt = null;
+
+        while (cur != null) {
+            nxt = cur.next;
+            cur.next = prev;
+            prev = cur;
+            cur = nxt;
+        }
+
+        return prev;
+    }
+}
+
+
+python:
+class Solution:
+    def reverseList(self, head):
+        cur = head
+        prev = None
+
+        while cur:
+            nxt = cur.next
+            cur.next = prev
+            prev = cur
+            cur = nxt
+
+        return prev
