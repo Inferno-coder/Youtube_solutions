@@ -1,0 +1,46 @@
+c++:
+class Solution {
+  public:
+    Node* reverseList(struct Node* head) {
+    if (!head || !head->next)return head;
+    Node* last = reverseList(head->next);
+    head->next->next = head;
+    head->next = nullptr;
+    return last;
+    }
+};
+
+python:
+class Solution:
+    def reverseList(self, head):
+        if head is None or head.next is None:
+            return head
+        last = self.reverseList(head.next)
+        head.next.next = head
+        head.next = None
+        return last
+
+# Definition for singly-linked list node
+class ListNode:
+    def __init__(self, val=0, next=None):
+        self.val = val
+        self.next = next
+
+
+java:
+class Solution {
+    public ListNode reverseList(ListNode head) {
+        if (head == null || head.next == null) return head;
+        ListNode last = reverseList(head.next);
+        head.next.next = head;
+        head.next = null;
+        return last;
+    }
+}
+
+// Definition for singly-linked list
+class ListNode {
+    int val;
+    ListNode next;
+    ListNode(int x) { val = x; }
+}
