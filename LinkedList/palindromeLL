@@ -1,0 +1,152 @@
+cpp:
+/**
+ * Definition for singly-linked list.
+ * struct ListNode {
+ *     int val;
+ *     ListNode *next;
+ *     ListNode() : val(0), next(nullptr) {}
+ *     ListNode(int x) : val(x), next(nullptr) {}
+ *     ListNode(int x, ListNode *next) : val(x), next(next) {}
+ * };
+ */
+class Solution {
+public:
+    ListNode* getMidNode(ListNode* head,int middle){
+        ListNode* temp=head;
+        for(int i=0;i<middle;i++){
+            temp=temp->next;
+        }
+        return temp;
+    }
+    ListNode* reverseLL(ListNode* head){
+        // if(!head || !head->next)return head;
+        // ListNode* tempHead=reverseLL(head->next);
+        // head->next->next=head;
+        // head->next=NULL;
+        // return tempHead;
+        ListNode *cur=head,*prev=NULL,*nxt=NULL;
+        while(cur){
+            nxt=cur->next;
+            cur->next=prev;
+            prev=cur;
+            cur=nxt;
+        }
+        return prev;
+    }
+    bool isPalindrome(ListNode* head) {
+        int len=0,middle=0;
+        ListNode* temp=head;
+        while(temp){
+            temp=temp->next;
+            len++;
+        }
+        temp=head;
+        middle= len/2-1;
+        ListNode* midNode=getMidNode(head,middle);
+        ListNode* reversedHead= reverseLL(midNode->next);
+        midNode->next=NULL;
+        while(temp && reversedHead){
+            if(temp->val != reversedHead->val)return false;
+            temp=temp->next;
+            reversedHead=reversedHead->next;
+        }
+        return true;
+    }
+};
+
+java:
+/**
+ * Definition for singly-linked list.
+ * public class ListNode {
+ *     int val;
+ *     ListNode next;
+ *     ListNode() {}
+ *     ListNode(int val) { this.val = val; }
+ *     ListNode(int val, ListNode next) { this.val = val; this.next = next; }
+ * }
+ */
+class Solution {
+    private ListNode getMidNode(ListNode head, int middle) {
+        ListNode temp = head;
+        for (int i = 0; i < middle; i++) {
+            temp = temp.next;
+        }
+        return temp;
+    }
+
+    private ListNode reverseLL(ListNode head) {
+        ListNode cur = head, prev = null, nxt = null;
+        while (cur != null) {
+            nxt = cur.next;
+            cur.next = prev;
+            prev = cur;
+            cur = nxt;
+        }
+        return prev;
+    }
+
+    public boolean isPalindrome(ListNode head) {
+        int len = 0, middle;
+        ListNode temp = head;
+        while (temp != null) {
+            temp = temp.next;
+            len++;
+        }
+        temp = head;
+        middle = len / 2 - 1;
+        ListNode midNode = getMidNode(head, middle);
+        ListNode reversedHead = reverseLL(midNode.next);
+        midNode.next = null;
+
+        while (temp != null && reversedHead != null) {
+            if (temp.val != reversedHead.val) return false;
+            temp = temp.next;
+            reversedHead = reversedHead.next;
+        }
+        return true;
+    }
+}
+
+
+
+python:
+# Definition for singly-linked list.
+class ListNode:
+    def __init__(self, val=0, next=None):
+        self.val = val
+        self.next = next
+
+class Solution:
+    def getMidNode(self, head: ListNode, middle: int) -> ListNode:
+        temp = head
+        for _ in range(middle):
+            temp = temp.next
+        return temp
+
+    def reverseLL(self, head: ListNode) -> ListNode:
+        cur, prev = head, None
+        while cur:
+            nxt = cur.next
+            cur.next = prev
+            prev = cur
+            cur = nxt
+        return prev
+
+    def isPalindrome(self, head: ListNode) -> bool:
+        length, temp = 0, head
+        while temp:
+            temp = temp.next
+            length += 1
+
+        middle = length // 2 - 1
+        midNode = self.getMidNode(head, middle)
+        reversedHead = self.reverseLL(midNode.next)
+        midNode.next = None
+
+        temp = head
+        while temp and reversedHead:
+            if temp.val != reversedHead.val:
+                return False
+            temp = temp.next
+            reversedHead = reversedHead.next
+        return True
