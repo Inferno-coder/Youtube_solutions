@@ -1,0 +1,98 @@
+cpp:
+/**
+ * Definition for singly-linked list.
+ * struct ListNode {
+ *     int val;
+ *     ListNode *next;
+ *     ListNode() : val(0), next(nullptr) {}
+ *     ListNode(int x) : val(x), next(nullptr) {}
+ *     ListNode(int x, ListNode *next) : val(x), next(next) {}
+ * };
+ */
+class Solution {
+public:
+    ListNode* oddEvenList(ListNode* head) {
+     ListNode* evenDum=new ListNode(0),*evenPtr=evenDum;   
+     ListNode* oddDum=new ListNode(0),*oddPtr=oddDum;
+     ListNode* temp=head;
+     int ind=1;
+     while(temp){
+        if(ind % 2==0){
+            evenPtr->next=temp;
+            evenPtr=evenPtr->next;
+        }else{
+             oddPtr->next=temp;
+            oddPtr=oddPtr->next;
+        }
+        temp=temp->next;
+        ind++;
+     }
+     oddPtr->next=evenDum->next;
+     evenPtr->next = nullptr;
+     return oddDum->next;   
+    }
+};
+
+java:
+/**
+ * Definition for singly-linked list.
+ * public class ListNode {
+ *     int val;
+ *     ListNode next;
+ *     ListNode() {}
+ *     ListNode(int val) { this.val = val; }
+ *     ListNode(int val, ListNode next) { this.val = val; this.next = next; }
+ * }
+ */
+class Solution {
+    public ListNode oddEvenList(ListNode head) {
+        ListNode evenDum = new ListNode(0), evenPtr = evenDum;
+        ListNode oddDum = new ListNode(0), oddPtr = oddDum;
+        ListNode temp = head;
+        int ind = 1;
+
+        while (temp != null) {
+            if (ind % 2 == 0) {
+                evenPtr.next = temp;
+                evenPtr = evenPtr.next;
+            } else {
+                oddPtr.next = temp;
+                oddPtr = oddPtr.next;
+            }
+            temp = temp.next;
+            ind++;
+        }
+
+        oddPtr.next = evenDum.next;
+        evenPtr.next = null;
+        return oddDum.next;
+    }
+}
+
+python:
+# Definition for singly-linked list.
+# class ListNode:
+#     def __init__(self, val=0, next=None):
+#         self.val = val
+#         self.next = next
+
+class Solution:
+    def oddEvenList(self, head: Optional[ListNode]) -> Optional[ListNode]:
+        evenDum, evenPtr = ListNode(0), None
+        oddDum, oddPtr = ListNode(0), None
+        evenPtr, oddPtr = evenDum, oddDum
+
+        temp, ind = head, 1
+        while temp:
+            if ind % 2 == 0:
+                evenPtr.next = temp
+                evenPtr = evenPtr.next
+            else:
+                oddPtr.next = temp
+                oddPtr = oddPtr.next
+            temp = temp.next
+            ind += 1
+
+        oddPtr.next = evenDum.next
+        evenPtr.next = None
+        return oddDum.next
