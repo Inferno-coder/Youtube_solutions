@@ -1,0 +1,74 @@
+C++:
+class Solution {
+public:
+    ListNode* removeNthFromEnd(ListNode* head, int n) {
+        if (!head || !head->next)
+            return NULL;
+        ListNode* dummy = new ListNode(0); //1
+        dummy->next = head;//2
+        ListNode *fast = dummy, *slow = dummy;//3
+        for (int i = 0; i <= n; i++)//4
+            fast = fast->next;
+        while (fast) {//5
+            fast = fast->next;
+            slow = slow->next;
+        }
+        if (slow->next)
+            slow->next = slow->next->next;
+        return dummy->next;
+    }
+};
+
+
+java:
+/**
+ * Definition for singly-linked list.
+ * public class ListNode {
+ *     int val;
+ *     ListNode next;
+ *     ListNode() {}
+ *     ListNode(int val) { this.val = val; }
+ *     ListNode(int val, ListNode next) { this.val = val; this.next = next; }
+ * }
+ */
+class Solution {
+    public ListNode removeNthFromEnd(ListNode head, int n) {
+        if (head == null || head.next == null) 
+            return null;
+        ListNode dummy = new ListNode(0);
+        dummy.next = head;
+        ListNode fast = dummy, slow = dummy;
+        for (int i = 0; i <= n; i++) 
+            fast = fast.next;
+        while (fast != null) {
+            fast = fast.next;
+            slow = slow.next;
+        }
+        if (slow.next != null)
+            slow.next = slow.next.next;
+        return dummy.next;
+    }
+}
+
+
+python:
+# Definition for singly-linked list.
+class ListNode:
+    def __init__(self, val=0, next=None):
+        self.val = val
+        self.next = next
+
+class Solution:
+    def removeNthFromEnd(self, head: ListNode, n: int) -> ListNode:
+        if not head or not head.next:
+            return None
+        dummy = ListNode(0, head)
+        fast, slow = dummy, dummy
+        for _ in range(n + 1):
+            fast = fast.next
+        while fast:
+            fast = fast.next
+            slow = slow.next
+        if slow.next:
+            slow.next = slow.next.next
+        return dummy.next
