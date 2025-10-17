@@ -1,0 +1,123 @@
+c++:
+/*
+
+struct Node
+{
+    int data;
+    struct Node* next;
+
+    Node(int x){
+        data = x;
+        next = NULL;
+    }
+};
+
+*/
+
+class Solution {
+  Node* reverse(Node* head) {
+      Node* prev = nullptr;
+      while (head) {
+          Node* next = head->next;
+          head->next = prev;
+          prev = head;
+          head = next;
+      }
+      return prev;
+  }
+  
+  public:
+    Node* addOne(Node* head) {
+        head = reverse(head);
+        Node* curr = head;
+        int carry = 1;
+        while (curr && carry) {
+            int sum = curr->data + carry;
+            curr->data = sum % 10;
+            carry = sum  /10 ;
+            if (!curr->next && carry) curr->next = new Node(0);
+            curr = curr->next;
+        }
+        return reverse(head);
+    }
+};
+
+
+java:
+
+class Node {
+    int data;
+    Node next;
+    Node(int x) {
+        data = x;
+        next = null;
+    }
+}
+
+class Solution {
+    private Node reverse(Node head) {
+        Node prev = null;
+        while (head != null) {
+            Node next = head.next;
+            head.next = prev;
+            prev = head;
+            head = next;
+        }
+        return prev;
+    }
+
+    public Node addOne(Node head) {
+        head = reverse(head);
+        Node curr = head;
+        int carry = 1;
+
+        while (curr != null && carry > 0) {
+            int sum = curr.data + carry;
+            curr.data = sum % 10;
+            carry = sum / 10;
+
+            if (curr.next == null && carry > 0)
+                curr.next = new Node(0);
+
+            curr = curr.next;
+        }
+
+        return reverse(head);
+    }
+}
+
+
+
+python:
+
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.next = None
+
+class Solution:
+    def reverse(self, head):
+        prev = None
+        while head:
+            nxt = head.next
+            head.next = prev
+            prev = head
+            head = nxt
+        return prev
+
+    def addOne(self, head):
+        head = self.reverse(head)
+        curr = head
+        carry = 1
+
+        while curr and carry:
+            s = curr.data + carry
+            curr.data = s % 10
+            carry = s // 10
+
+            if not curr.next and carry:
+                curr.next = Node(0)
+
+            curr = curr.next
+
+        return self.reverse(head)
