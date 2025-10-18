@@ -1,0 +1,45 @@
+c++:
+
+class Solution {
+  public:
+    Node* intersectPoint(Node* head1, Node* head2) {
+        //  Code Here
+        Node *t1=head1,*t2=head2;
+        while(t1!=t2){
+            t1=t1?t1->next:head2;
+            t2=t2?t2->next:head1;
+        }
+        return t1;
+    }
+};
+
+java:
+class Solution {
+    Node intersectPoint(Node head1, Node head2) {
+        Node t1 = head1, t2 = head2;
+        while (t1 != t2) {
+            t1 = (t1 != null) ? t1.next : head2;
+            t2 = (t2 != null) ? t2.next : head1;
+        }
+        return t1;
+    }
+}
+
+class Node {
+    int data;
+    Node next;
+    Node(int x) {
+        data = x;
+        next = null;
+    }
+}
+
+
+python:
+class Solution:
+    def intersectPoint(self, head1, head2):
+        t1, t2 = head1, head2
+        while t1 != t2:
+            t1 = t1.next if t1 else head2
+            t2 = t2.next if t2 else head1
+        return t1
